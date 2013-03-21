@@ -1,0 +1,31 @@
+{
+    "name": "ecnerta/web-browser-checker-bundle",
+    "type": "symfony-bundle",
+    "description": "Check if client web browser match a minimum version",
+    "keywords": ["browser", "symfony2", "bundle", "ecnerta"],
+    "license": "MIT",
+
+    "authors": [
+        {
+            "name": "Valérian Girard",
+            "email": "waldo2188@gmail.com",
+            "homepage": "http://www.mon-beulogue.com",
+            "role": "Developer"
+        }
+    ],
+
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": "2.*,<2.2",
+        "twig/twig": ">=1.5"
+    },
+
+    "autoload": {
+        "psr-0": {
+            "ECnerta\\Bundle\\WebBrowserCheckerBundle": ""
+        }
+    },
+
+    "target-dir": "ECnerta/Bundle/WebBrowserCheckerBundle"
+}
+
