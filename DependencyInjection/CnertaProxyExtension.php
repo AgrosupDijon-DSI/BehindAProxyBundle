@@ -22,11 +22,13 @@ class CnertaProxyExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.xml');
+
         foreach($config as $configKey => $configVal) {
             $container->setParameter('cnerta_proxy.' . $configKey, $configVal);
         }
 
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.xml');
+        $container->getDefinition('cnerta.proxy')->replaceArgument(0, $config);
     }
 }
