@@ -68,4 +68,33 @@ class ProxyService
         return false;
     }
 
+    /**
+     * Méthode php file_get_contents à travers un proxy
+     *
+     * @param string $url
+     * @return string
+     */
+    public function fileGetContent($url)
+    {
+        $cxContext = null;
+        
+        if ($this->parameters["enabled"] === true) {
+            $context = array(
+                'http' => array(
+                    'proxy' => 'tcp://' . $this->parameters["host"] . ':' . $this->parameters["port"],
+                    'request_fulluri' => true,
+                )
+            );
+
+            if ($this->parameters["login"] != null) {
+                $auth = base64_encode($this->parameters["login"] . ':' . $this->parameters["password"]);
+                $context['http']['header'] = "Proxy-Authorization: Basic $auth";
+            }
+            
+            $cxContext = stream_context_create($context);
+        }
+
+        return file_get_contents($url, false, $cxContext);
+    }
+
 }
