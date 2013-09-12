@@ -48,7 +48,8 @@ config.yml
         port: 80                      # type: mixed(string|int), default value: null, desc : this is the port of the proxy server
         host_ssl: 172.0.0.2           # type: string, default value: null, desc : this is the IP or URL of the proxy server for HTTPS/SSL connection
         login: myWonderfulLogin       # type: string, default value: null, desc : this is the login for authentication against the proxy server
-        password: myWonderfulLogin    # type: string, default value: nullthis is the password for authentication against the proxy server
+        password: myWonderfulLogin    # type: string, default value: null, this is the password for authentication against the proxy server
+        load_default_stream_context: false    # type: boolean, default value: false, If you need to set the default proxy config global
 ```
 
 
