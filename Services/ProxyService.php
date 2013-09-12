@@ -19,6 +19,16 @@ class ProxyService
     }
 
     /**
+     *
+     */
+    public function streamContextSetDefault()
+    {
+        if ($this->parameters["enabled"] === true && $this->parameters["load_default_stream_context"]) {
+            stream_context_set_default($this->getStreamContext());
+        }
+    }
+
+    /**
      * Set proxy parameters for a SoapClient connection
      *
      * @param array $configs
@@ -69,7 +79,7 @@ class ProxyService
     }
 
     /**
-     * Méthode php file_get_contents à travers un proxy
+     * Method php file_get_contents through a proxy
      *
      * @param string $url
      * @return string
@@ -78,6 +88,23 @@ class ProxyService
     {
         $cxContext = null;
         
+        if ($this->parameters["enabled"] === true) {
+            $context = $this->getStreamContext();
+            
+            $cxContext = stream_context_create($context);
+        }
+
+        return file_get_contents($url, false, $cxContext);
+    }
+
+
+    /**
+     * Get configuration for a stream context
+     *
+     * @return array
+     */
+    private function getStreamContext()
+    {
         if ($this->parameters["enabled"] === true) {
             $context = array(
                 'http' => array(
@@ -90,11 +117,11 @@ class ProxyService
                 $auth = base64_encode($this->parameters["login"] . ':' . $this->parameters["password"]);
                 $context['http']['header'] = "Proxy-Authorization: Basic $auth";
             }
-            
-            $cxContext = stream_context_create($context);
+
+            return $context;
         }
 
-        return file_get_contents($url, false, $cxContext);
+        return null;
     }
 
 }

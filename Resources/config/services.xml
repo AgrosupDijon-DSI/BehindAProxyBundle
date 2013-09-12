@@ -7,11 +7,17 @@
 
     <parameters>
         <parameter key="cnerta.proxy_class">Cnerta\ProxyBundle\Services\ProxyService</parameter>
+        <parameter key="cnerta.listener_class">Cnerta\ProxyBundle\Listener\ProxyListener</parameter>
     </parameters>
 
     <services>
         <service id="cnerta.proxy" class="%cnerta.proxy_class%">
             <argument type="service" id="service_container" />
+        </service>
+
+        <service id="cnerta.proxylistner" class="%cnerta.listener_class%">
+            <tag name="kernel.event_subscriber" />
+            <argument type="service" id="cnerta.proxy" />
         </service>
     </services>
 

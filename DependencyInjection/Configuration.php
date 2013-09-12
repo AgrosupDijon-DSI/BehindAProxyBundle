@@ -27,6 +27,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('port')->defaultValue(null)->end()
                         ->scalarNode('login')->defaultValue(null)->end()
                         ->scalarNode('password')->defaultValue(null)->end()
+                        ->scalarNode('load_default_stream_context')->defaultValue(false)->end()
                     ->end()
                 ->end()
                 ;
