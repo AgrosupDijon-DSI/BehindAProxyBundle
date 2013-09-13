@@ -12,7 +12,7 @@ Install the Bundle
 ```json
      "require": {
         // ...
-        "cnerta/proxy-bundle": "master"
+        "cnerta/behind-a-proxy-bundle": "master"
     },
     "repositories": [
         {
@@ -42,7 +42,7 @@ config.yml
 
 ```yaml
 
-    cnerta_proxy:
+    cnerta_behind_a_proxy:
         enabled: false                # type: boulean, default value: false, desc: enabled (true), or desabled (false) the use of proxy
         host: 172.0.0.1               # type: string, default value: null, desc : this is the IP or URL of the proxy server
         port: 80                      # type: mixed(string|int), default value: null, desc : this is the port of the proxy server

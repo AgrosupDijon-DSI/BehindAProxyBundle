@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class CnertaProxyExtension extends Extension
+class CnertaBehindAProxyExtension extends Extension
 {
     /**
      * {@inheritDoc}
@@ -26,7 +26,7 @@ class CnertaProxyExtension extends Extension
         $loader->load('services.xml');
 
         foreach($config as $configKey => $configVal) {
-            $container->setParameter('cnerta_proxy.' . $configKey, $configVal);
+            $container->setParameter('cnerta_behind_a_proxy.' . $configKey, $configVal);
         }
 
         $container->getDefinition('cnerta.proxy')->replaceArgument(0, $config);

@@ -19,7 +19,7 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder
-            ->root('cnerta_proxy')
+            ->root('cnerta_behind_a_proxy')
                 ->children()
                         ->scalarNode('enabled')->defaultFalse()->end()
                         ->scalarNode('host')->defaultValue(null)->end()

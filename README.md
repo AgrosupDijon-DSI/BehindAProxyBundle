@@ -12,7 +12,7 @@ Install the Bundle
 ```json
      "require": {
         // ...
-        "cnerta/proxy-bundle": "master"
+        "cnerta/behind-a-proxy-bundle": "master"
     },
     "repositories": [
         {
