@@ -1,7 +1,7 @@
 {
     "name": "cnerta/proxy-bundle",
     "type": "symfony-bundle",
-    "description": "Add proxy parameters for CURL and SoapClient connection.",
+    "description": "Add proxy parameters for CURL, SoapClient connection and PHP function using stream context.",
     "keywords": ["proxy", "symfony2", "bundle", "cnerta"],
     "license": "MIT",
 
@@ -16,7 +16,7 @@
 
     "require": {
         "php": ">=5.3.2",
-        "symfony/framework-bundle": "2.*"
+        "symfony/framework-bundle": ">2.1"
     },
 
     "autoload": {

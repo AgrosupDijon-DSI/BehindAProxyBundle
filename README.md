@@ -1,7 +1,7 @@
 Cnerta Proxy Bundle
 ===================
 
-Add proxy parameters for CURL and SoapClient connection.
+Add proxy parameters for CURL, SoapClient connection and PHP function using stream context.
 
 
 Install the Bundle
@@ -17,7 +17,7 @@ Install the Bundle
     "repositories": [
         {
             "type": "git",
-            "url": "git@eduforge.eduter.local:webmodules/sf2-proxy-bundle.git",
+            "url": "git@github.com:AgrosupDijon-Eduter/ProxyBundle.git",
             "branch": "master"
         }
     ]
