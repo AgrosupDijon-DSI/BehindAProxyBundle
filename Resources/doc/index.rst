@@ -29,7 +29,7 @@ Install the Bundle
     // in AppKernel::registerBundles()
     $bundles = array(
         // ...
-        new Cnerta\ProxyBundle\CnertaProxyBundle(),
+        new Cnerta\BehindAProxyBundle\CnertaBehindAProxyBundle(),
         // ...
     );
 ```

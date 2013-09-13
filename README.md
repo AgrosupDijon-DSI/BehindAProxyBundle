@@ -1,5 +1,5 @@
-Cnerta Proxy Bundle
-===================
+Cnerta Behind A Proxy Bundle
+============================
 
 Add proxy parameters for CURL, SoapClient connection and PHP function using stream context.
 
@@ -17,7 +17,7 @@ Install the Bundle
     "repositories": [
         {
             "type": "git",
-            "url": "git@github.com:AgrosupDijon-Eduter/ProxyBundle.git",
+            "url": "git@github.com:AgrosupDijon-Eduter/BehindAProxyBundle.git",
             "branch": "master"
         }
     ]
@@ -29,7 +29,7 @@ Install the Bundle
     // in AppKernel::registerBundles()
     $bundles = array(
         // ...
-        new Cnerta\ProxyBundle\CnertaProxyBundle(),
+        new Cnerta\BehindAProxyBundle\CnertaBehindAProxyBundle(),
         // ...
     );
 ```

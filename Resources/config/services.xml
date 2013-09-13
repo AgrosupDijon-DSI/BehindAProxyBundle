@@ -6,8 +6,8 @@
 
 
     <parameters>
-        <parameter key="cnerta.proxy_class">Cnerta\ProxyBundle\Services\ProxyService</parameter>
-        <parameter key="cnerta.listener_class">Cnerta\ProxyBundle\Listener\ProxyListener</parameter>
+        <parameter key="cnerta.proxy_class">Cnerta\BehindAProxyBundle\Services\ProxyService</parameter>
+        <parameter key="cnerta.listener_class">Cnerta\BehindAProxyBundle\Listener\ProxyListener</parameter>
     </parameters>
 
     <services>

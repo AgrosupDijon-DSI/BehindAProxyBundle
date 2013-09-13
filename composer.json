@@ -1,5 +1,5 @@
 {
-    "name": "cnerta/proxy-bundle",
+    "name": "cnerta/behind-a-proxy-bundle",
     "type": "symfony-bundle",
     "description": "Add proxy parameters for CURL, SoapClient connection and PHP function using stream context.",
     "keywords": ["proxy", "symfony2", "bundle", "cnerta"],
@@ -21,10 +21,10 @@
 
     "autoload": {
         "psr-0": {
-            "Cnerta\\ProxyBundle": ""
+            "Cnerta\\BehindAProxyBundle": ""
         }
     },
 
-    "target-dir": "Cnerta/ProxyBundle"
+    "target-dir": "Cnerta/BehindAProxyBundle"
 }
 

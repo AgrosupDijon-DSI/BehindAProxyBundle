@@ -1,6 +1,6 @@
 <?php
 
-namespace Cnerta\ProxyBundle\DependencyInjection;
+namespace Cnerta\BehindAProxyBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

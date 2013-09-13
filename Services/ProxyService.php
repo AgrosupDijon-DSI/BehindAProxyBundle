@@ -1,6 +1,6 @@
 <?php
 
-namespace Cnerta\ProxyBundle\Services;
+namespace Cnerta\BehindAProxyBundle\Services;
 
 /**
  * @author Valérian Girard <valerian.girard@educagri.fr>

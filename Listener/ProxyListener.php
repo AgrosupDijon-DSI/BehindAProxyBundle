@@ -1,12 +1,12 @@
 <?php
 
-namespace Cnerta\ProxyBundle\Listener;
+namespace Cnerta\BehindAProxyBundle\Listener;
 
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Cnerta\ProxyBundle\Services\ProxyService;
+use Cnerta\BehindAProxyBundle\Services\ProxyService;
 
 /**
  *
@@ -14,7 +14,7 @@ use Cnerta\ProxyBundle\Services\ProxyService;
 class ProxyListener implements EventSubscriberInterface
 {
     /**
-     * @var Cnerta\ProxyBundle\Services\ProxyService
+     * @var Cnerta\BehindAProxyBundle\Services\ProxyService
      */
     protected $proxyService;
  
