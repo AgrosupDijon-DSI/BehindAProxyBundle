@@ -11,13 +11,13 @@
     </parameters>
 
     <services>
-        <service id="cnerta.proxy" class="%cnerta.proxy_class%">
+        <service id="cnerta.baproxy" class="%cnerta.proxy_class%">
             <argument type="service" id="service_container" />
         </service>
 
         <service id="cnerta.proxylistner" class="%cnerta.listener_class%">
             <tag name="kernel.event_subscriber" />
-            <argument type="service" id="cnerta.proxy" />
+            <argument type="service" id="cnerta.baproxy" />
         </service>
     </services>
 

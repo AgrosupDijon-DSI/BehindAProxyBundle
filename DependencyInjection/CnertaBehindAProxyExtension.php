@@ -26,9 +26,9 @@ class CnertaBehindAProxyExtension extends Extension
         $loader->load('services.xml');
 
         foreach($config as $configKey => $configVal) {
-            $container->setParameter('cnerta_behind_a_proxy.' . $configKey, $configVal);
+            $container->setParameter('cnerta_baproxy.' . $configKey, $configVal);
         }
 
-        $container->getDefinition('cnerta.proxy')->replaceArgument(0, $config);
+        $container->getDefinition('cnerta.baproxy')->replaceArgument(0, $config);
     }
 }
