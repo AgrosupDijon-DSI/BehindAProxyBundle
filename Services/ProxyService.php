@@ -101,6 +101,7 @@ class ProxyService
     /**
      * Get configuration for a stream context
      *
+     * @see http://pas-bien.net/blog/2007/12/21/utilisation-avancee-de-file_get_contents-php-5
      * @return array
      */
     private function getStreamContext()
@@ -116,6 +117,7 @@ class ProxyService
             if ($this->parameters["login"] != null) {
                 $auth = base64_encode($this->parameters["login"] . ':' . $this->parameters["password"]);
                 $context['http']['header'] = "Proxy-Authorization: Basic $auth";
+                $context['https']['header'] = "Proxy-Authorization: Basic $auth";
             }
 
             return $context;
