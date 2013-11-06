@@ -3,6 +3,8 @@ Cnerta Behind A Proxy Bundle
 
 Add proxy parameters for CURL, SoapClient connection and PHP function using stream context.
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/75b154ce-60c0-45f3-89c7-e23770e83eaa/big.png)](https://insight.sensiolabs.com/projects/75b154ce-60c0-45f3-89c7-e23770e83eaa)
+
 
 Install the Bundle
 ------------------
