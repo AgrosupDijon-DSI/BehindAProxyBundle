@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder
+        $treeBuilder
             ->root('cnerta_behind_a_proxy')
                 ->children()
                         ->scalarNode('enabled')->defaultFalse()->end()
