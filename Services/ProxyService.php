@@ -23,7 +23,7 @@ class ProxyService
      * Retur true if the stream context default is set
      * @return boolean
      */
-    public function streamContextSetDefault()
+    public function setDefaultStreamContext()
     {
         if ($this->parameters["enabled"] === true && $this->parameters["load_default_stream_context"]) {
             stream_context_set_default($this->getStreamContext());
