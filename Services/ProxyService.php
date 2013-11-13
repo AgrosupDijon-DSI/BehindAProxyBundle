@@ -105,7 +105,7 @@ class ProxyService
      * @see http://pas-bien.net/blog/2007/12/21/utilisation-avancee-de-file_get_contents-php-5
      * @return array
      */
-    private function getStreamContext()
+    public function getStreamContext()
     {
         if ($this->parameters["enabled"] === true) {
             $context = array(
