@@ -136,5 +136,4 @@ Get Parameters anywhere
     $this->container->getParameter("cnerta_baproxy.host_ssl")
     $this->container->getParameter("cnerta_baproxy.login")
     $this->container->getParameter("cnerta_baproxy.password")
-
 ```
