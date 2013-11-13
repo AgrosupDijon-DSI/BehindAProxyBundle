@@ -6,6 +6,8 @@ Add proxy parameters for CURL, SoapClient connection and PHP function using stre
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/75b154ce-60c0-45f3-89c7-e23770e83eaa/big.png)](https://insight.sensiolabs.com/projects/75b154ce-60c0-45f3-89c7-e23770e83eaa)
 
 [![Build Status](https://travis-ci.org/AgrosupDijon-Eduter/BehindAProxyBundle.png)](https://travis-ci.org/AgrosupDijon-Eduter/BehindAProxyBundle)
+[![Latest Stable Version](https://poser.pugx.org/cnerta/behind-a-proxy-bundle/v/stable.png)](https://packagist.org/packages/cnerta/behind-a-proxy-bundle)
+[![Latest Unstable Version](https://poser.pugx.org/cnerta/behind-a-proxy-bundle/v/unstable.png)](https://packagist.org/packages/cnerta/behind-a-proxy-bundle)
 
 Install the Bundle
 ------------------
