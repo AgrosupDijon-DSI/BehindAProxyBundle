@@ -13,17 +13,18 @@ use Cnerta\BehindAProxyBundle\Services\ProxyService;
  */
 class ProxyListener implements EventSubscriberInterface
 {
+
     /**
      * @var Cnerta\BehindAProxyBundle\Services\ProxyService
      */
     protected $proxyService;
- 
+
     function __construct(ProxyService $proxyService)
     {
         $this->proxyService = $proxyService;
     }
 
-        /**
+    /**
      * Handles security.
      *
      * @param GetResponseEvent $event An GetResponseEvent instance
@@ -39,4 +40,5 @@ class ProxyListener implements EventSubscriberInterface
     {
         return array(KernelEvents::REQUEST => array('onKernelRequest', 8));
     }
+
 }
