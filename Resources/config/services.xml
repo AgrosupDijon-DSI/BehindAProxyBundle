@@ -15,7 +15,7 @@
             <argument type="service" id="service_container" />
         </service>
 
-        <service id="cnerta.proxylistner" class="%cnerta.listener_class%">
+        <service id="cnerta.baproxy.proxylistner" class="%cnerta.listener_class%">
             <tag name="kernel.event_subscriber" />
             <argument type="service" id="cnerta.baproxy" />
         </service>
