@@ -32,7 +32,7 @@ class ProxyListener implements EventSubscriberInterface
     public function onKernelRequest(GetResponseEvent $event)
     {
         if (HttpKernelInterface::MASTER_REQUEST == $event->getRequestType()) {
-            $this->proxyService->streamContextSetDefault();
+            $this->proxyService->loadDefaultStreamContext();
         }
     }
 
