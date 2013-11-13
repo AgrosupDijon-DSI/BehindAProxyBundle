@@ -16,7 +16,7 @@ class ProxyListenerTest extends \PHPUnit_Framework_TestCase
 {
 
 
-    public function testSubscibeEvents()
+    public function testSubscribeEvents()
     {
         $expectedReturn  = array(KernelEvents::REQUEST => array('onKernelRequest', 8));
 
