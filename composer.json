@@ -7,9 +7,9 @@
 
     "authors": [
         {
-            "name": "Valérian Girard",
-            "email": "valerian.girard@educagri.fr",
-            "homepage": "http://www.mon-beulogue.com",
+            "name":     "Valérian Girard",
+            "email":    "valerian.girard@educagri.fr",
+            "homepage": "http://www.cnerta.educagri.fr/",
             "role": "Developer"
         }
     ],
