@@ -12,15 +12,8 @@ Install the Bundle
 ```json
      "require": {
         // ...
-        "cnerta/behind-a-proxy-bundle": "master"
-    },
-    "repositories": [
-        {
-            "type": "git",
-            "url": "git@github.com:AgrosupDijon-Eduter/BehindAProxyBundle.git",
-            "branch": "master"
-        }
-    ]
+        "cnerta/behind-a-proxy-bundle": "1.0.*"
+    }
 ```
 
 2. Then add it to your AppKernel class::
