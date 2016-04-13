@@ -19,7 +19,8 @@ Install the Bundle
 2. Then add it to your AppKernel class::
 
 ```php
-    // in AppKernel::registerBundles()
+
+// in AppKernel::registerBundles()
     $bundles = array(
         // ...
         new Cnerta\BehindAProxyBundle\CnertaBehindAProxyBundle(),
@@ -39,7 +40,6 @@ config.yml
         enabled: false                # type: boulean, default value: false, desc: enabled (true), or desabled (false) the use of proxy
         host: 172.0.0.1               # type: string, default value: null, desc : this is the IP or URL of the proxy server
         port: 80                      # type: mixed(string|int), default value: null, desc : this is the port of the proxy server
-        host_ssl: 172.0.0.2           # type: string, default value: null, desc : this is the IP or URL of the proxy server for HTTPS/SSL connection
         login: myWonderfulLogin       # type: string, default value: null, desc : this is the login for authentication against the proxy server
         password: myWonderfulLogin    # type: string, default value: null, this is the password for authentication against the proxy server
         load_default_stream_context: false    # type: boolean, default value: false, If you need to set the default proxy config global
@@ -124,7 +124,6 @@ Get Parameters anywhere
     $this->container->getParameter("cnerta_baproxy.enabled")
     $this->container->getParameter("cnerta_baproxy.host")
     $this->container->getParameter("cnerta_baproxy.port")
-    $this->container->getParameter("cnerta_baproxy.host_ssl")
     $this->container->getParameter("cnerta_baproxy.login")
     $this->container->getParameter("cnerta_baproxy.password")
 

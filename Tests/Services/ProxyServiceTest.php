@@ -6,6 +6,7 @@ use Cnerta\BehindAProxyBundle\Services\ProxyService;
 
 /**
  * @author Valérian Girard <valerian.girard@educagri.fr>
+ * @group proxyService
  */
 class ProxyServiceTest extends \PHPUnit_Framework_TestCase
 {
@@ -47,11 +48,11 @@ class ProxyServiceTest extends \PHPUnit_Framework_TestCase
     public function dataProviderProxyForSoapClient()
     {
         return array(
-            array('params' => array("enabled" => true, "host" => "127.0.0.1", "port" => "8080", "host_ssl" => "127.0.0.11"),
+            array('params' => array("enabled" => true, "host" => "127.0.0.1", "port" => "8080"),
                 'configExpected' => array('proxy_host' => "127.0.0.1", 'proxy_port' => "8080")),
-            array('params' => array("enabled" => true, "host" => "127.0.0.1", "port" => "8080", "host_ssl" => "127.0.0.11", "login" => "regis.robert"),
+            array('params' => array("enabled" => true, "host" => "127.0.0.1", "port" => "8080", "login" => "regis.robert"),
                 'configExpected' => array('proxy_host' => "127.0.0.1", 'proxy_port' => "8080", 'proxy_login' => "regis.robert")),
-            array('params' => array("enabled" => true, "host" => "127.0.0.1", "port" => "8080", "host_ssl" => "127.0.0.11", "password" => "thisissecret"),
+            array('params' => array("enabled" => true, "host" => "127.0.0.1", "port" => "8080", "password" => "thisissecret"),
                 'configExpected' => array('proxy_host' => "127.0.0.1", 'proxy_port' => "8080", 'proxy_password' => "thisissecret")),
         );
     }
@@ -69,6 +70,17 @@ class ProxyServiceTest extends \PHPUnit_Framework_TestCase
         $proxyService->setProxyForSoapClient($configs);
 
         $this->assertEquals($configExpected, $configs);
+    }
+
+    public function testProxyForSoapClientWithContext()
+    {
+        $param = array_merge($this->defaultParameters(), array("enabled" => true, "host" => "127.0.0.1", "port" => "8080"));
+        $proxyService = new ProxyService($param);
+
+        $configs = array();
+        $proxyService->setProxyForSoapClient($configs, true);
+
+        $this->assertArrayHasKey('stream_context', $configs);
     }
 
     /**
@@ -89,27 +101,51 @@ class ProxyServiceTest extends \PHPUnit_Framework_TestCase
 
         return array(
             array('params' => array(),
-                  "expected" => null),
-            
-            array('params' => array("enabled" => true, "host" => "127.0.0.1", "port" => "8080", "host_ssl" => "127.0.0.11"),
-                  "expected" => array(
-                      'http' => array(
+                "expected" => null),
+
+            array('params' => array("enabled" => true, "host" => "127.0.0.1", "port" => "8080"),
+                "expected" => array(
+                    'http' => array(
+                        'proxy' => 'tcp://127.0.0.1:8080',
+                        'request_fulluri' => true,
+                    ),
+                    'https' => array(
                         'proxy' => 'tcp://127.0.0.1:8080',
                         'request_fulluri' => true,
                     )
-                  )),
+                )),
 
-            array('params' => array("enabled" => true, "host" => "127.0.0.1", "port" => "8080", "host_ssl" => "127.0.0.11", "login" => "regis.robert", "password" => "thisissecret"),
-                  "expected" => array(
-                      'http' => array(
-                        'proxy' => 'tcp://127.0.0.1:8080',
+            array('params' => array("enabled" => true, "host" => "127.0.0.2", "port" => "8080", "login" => "regis.robert", "password" => "thisissecret"),
+                "expected" => array(
+                    'http' => array(
+                        'proxy' => 'tcp://127.0.0.2:8080',
                         'request_fulluri' => true,
                         'header' => "Proxy-Authorization: Basic $auth",
-                        ),
-                      'https' => array('header' => "Proxy-Authorization: Basic $auth")
-                  )
-           )
-                     
+                    ),
+                    'https' => array(
+                        'proxy' => 'tcp://127.0.0.2:8080',
+                        'request_fulluri' => true,
+                        'header' => "Proxy-Authorization: Basic $auth")
+                )
+            ),
+
+            array('params' => array(
+                "enabled" => true, "host" => "", "port" => "", "login" => "", "password" => "",
+                "http" => array(
+                    "host_proxy" => "127.0.0.1",
+                    "port_proxy" => "42",
+                    "login_proxy" => "regis.robert",
+                    "password_proxy" => "thisissecret",
+                    "request_fulluri" => false
+                )),
+                "expected" => array(
+                    'http' => array(
+                        'proxy' => 'tcp://127.0.0.1:42',
+                        'request_fulluri' => false,
+                        'header' => "Proxy-Authorization: Basic $auth",
+                    )
+                    )
+            )
         );
 
     }
@@ -122,7 +158,7 @@ class ProxyServiceTest extends \PHPUnit_Framework_TestCase
         $param = array_merge($this->defaultParameters(), $params);
 
         $proxyService = new ProxyService($param);
-        
+
         $context = $proxyService->getStreamContext();
 
         $this->assertEquals($expected, $context);
@@ -134,7 +170,6 @@ class ProxyServiceTest extends \PHPUnit_Framework_TestCase
             "enabled" => false,
             "host" => null,
             "port" => null,
-            "host_ssl" => null,
             "login" => null,
             "password" => null,
             "load_default_stream_context" => false,

@@ -9,6 +9,8 @@ Add proxy parameters for CURL, SoapClient connection and PHP function using stre
 [![Latest Stable Version](https://poser.pugx.org/cnerta/behind-a-proxy-bundle/v/stable.png)](https://packagist.org/packages/cnerta/behind-a-proxy-bundle)
 [![Latest Unstable Version](https://poser.pugx.org/cnerta/behind-a-proxy-bundle/v/unstable.png)](https://packagist.org/packages/cnerta/behind-a-proxy-bundle)
 
+> **WARNING** `host_ssl` configuration has been removed since version 2.0.0
+
 Install the Bundle
 ------------------
 
@@ -42,12 +44,23 @@ config.yml
 
     cnerta_behind_a_proxy:
         enabled: false                # type: boulean, default value: false, desc: enabled (true), or desabled (false) the use of proxy
-        host: 172.0.0.1               # type: string, default value: null, desc : this is the IP or URL of the proxy server
+        host: 127.0.0.1               # type: string, default value: null, desc : this is the IP or URL of the proxy server
         port: 80                      # type: mixed(string|int), default value: null, desc : this is the port of the proxy server
-        host_ssl: 172.0.0.2           # type: string, default value: null, desc : this is the IP or URL of the proxy server for HTTPS/SSL connection
         login: myWonderfulLogin       # type: string, default value: null, desc : this is the login for authentication against the proxy server
         password: myWonderfulLogin    # type: string, default value: null, this is the password for authentication against the proxy server
         load_default_stream_context: false    # type: boolean, default value: false, If you need to set the default proxy config global
+        http:       # Option set only for http request
+            host_proxy: 127.0.0.1     # type: string, default value: null, desc : this is the IP or URL of the proxy server
+            port_proxy: 80            # type: mixed(string|int), default value: null, desc : this is the port of the proxy server
+            login_proxy: login        # type: string, default value: null, desc : this is the login for authentication against the proxy server
+            password_proxy: password  # type: string, default value: null, this is the password for authentication against the proxy server
+            request_fulluri: true     # type: boulean, default value: false, desc: enabled (true), or desabled (false) the full uri option of context
+        https:      # Option set only for https request
+            host_proxy: 127.0.0.1     # type: string, default value: null, desc : this is the IP or URL of the proxy server
+            port_proxy: 80            # type: mixed(string|int), default value: null, desc : this is the port of the proxy server
+            login_proxy: login        # type: string, default value: null, desc : this is the login for authentication against the proxy server
+            password_proxy: password  # type: string, default value: null, this is the password for authentication against the proxy server
+            request_fulluri: true     # type: boulean, default value: false, desc: enabled (true), or desabled (false) the full uri option of context
 ```
 
 
@@ -132,4 +145,6 @@ Get Parameters anywhere
     $this->container->getParameter("cnerta_baproxy.host_ssl")
     $this->container->getParameter("cnerta_baproxy.login")
     $this->container->getParameter("cnerta_baproxy.password")
+    $this->container->getParameter("cnerta_baproxy.http")
+    $this->container->getParameter("cnerta_baproxy.https")
 ```

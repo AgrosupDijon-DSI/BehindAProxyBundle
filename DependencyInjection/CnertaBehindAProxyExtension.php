@@ -24,7 +24,7 @@ class CnertaBehindAProxyExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
-
+        
         foreach($config as $configKey => $configVal) {
             $container->setParameter('cnerta_baproxy.' . $configKey, $configVal);
         }

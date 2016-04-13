@@ -36,7 +36,7 @@ class ProxyService
      *
      * @param array $configs
      */
-    public function setProxyForSoapClient(array &$configs)
+    public function setProxyForSoapClient(array &$configs, $needContext = false)
     {
         if ($this->parameters["enabled"] === true) {
             $configs['proxy_host'] = $this->parameters["host"];
@@ -47,6 +47,10 @@ class ProxyService
             }
             if ($this->parameters["password"] != null) {
                 $configs['proxy_password'] = $this->parameters["password"];
+            }
+
+            if($needContext === true) {
+                $configs['stream_context'] = $this->getStreamContext(false);
             }
         }
     }
@@ -91,9 +95,7 @@ class ProxyService
         $cxContext = null;
 
         if ($this->parameters["enabled"] === true) {
-            $context = $this->getStreamContext();
-
-            $cxContext = stream_context_create($context);
+            $cxContext = $this->getStreamContext(false);
         }
 
         return file_get_contents($url, false, $cxContext);
@@ -101,30 +103,102 @@ class ProxyService
 
     /**
      * Get configuration for a stream context
-     *
-     * @see http://pas-bien.net/blog/2007/12/21/utilisation-avancee-de-file_get_contents-php-5
-     * @return array
+     * @param bool $raw If true, return an array with configuration, if false return context resource
+     * @return array|null
      */
-    public function getStreamContext()
+    public function getStreamContext($raw = true)
     {
         if ($this->parameters["enabled"] === true) {
-            $context = array(
-                'http' => array(
-                    'proxy' => 'tcp://' . $this->parameters["host"] . ':' . $this->parameters["port"],
-                    'request_fulluri' => true,
-                )
-            );
 
-            if ($this->parameters["login"] != null) {
-                $auth = base64_encode($this->parameters["login"] . ':' . $this->parameters["password"]);
-                $context['http']['header'] = "Proxy-Authorization: Basic $auth";
-                $context['https']['header'] = "Proxy-Authorization: Basic $auth";
+            $context = array();
+
+            foreach(array('http', 'https') as $protocol) {
+
+                if (array_key_exists($protocol, $this->parameters)) {
+                    $httpsProxy = $this->makeTcpUri(
+                        $this->parameters[$protocol]["host_proxy"],
+                        $this->parameters[$protocol]["port_proxy"]
+                    );
+                    $context[$protocol]['proxy'] = $httpsProxy;
+                    $context[$protocol]['request_fulluri'] = $this->parameters[$protocol]["request_fulluri"];
+
+                    if ($this->parameters[$protocol]['login_proxy'] !== '') {
+                        $auth = $this->encodeCredential(
+                            $this->parameters[$protocol]["login_proxy"],
+                            $this->parameters[$protocol]["password_proxy"]
+                        );
+                        $context[$protocol]['header'] = "Proxy-Authorization: Basic $auth";
+                    }
+                }
             }
 
-            return $context;
+            if(count($context) === 0) {
+                $defaultProxy = $this->makeTcpUri(
+                    $this->parameters["host"],
+                    $this->parameters["port"]
+                );
+
+                if ($defaultProxy) {
+                    $context = array(
+                        'http' => array(
+                            'proxy' => $defaultProxy,
+                            'request_fulluri' => true,
+                        ),
+                        'https' => array(
+                            'proxy' => $defaultProxy,
+                            'request_fulluri' => true,
+                        )
+                    );
+                }
+
+                if ($this->parameters["login"] != null) {
+                    $auth = $this->encodeCredential($this->parameters["login"], $this->parameters["password"]);
+                    $context['http']['header'] = "Proxy-Authorization: Basic $auth";
+                    $context['https']['header'] = "Proxy-Authorization: Basic $auth";
+                }
+            }
+
+            return $raw
+                ? $context
+                : stream_context_create($context);
         }
 
         return null;
+    }
+
+    /**
+     * @param string $login
+     * @param string $password
+     * @return string
+     */
+    private function encodeCredential($login, $password)
+    {
+        return base64_encode($login . ':' . $password);
+    }
+
+    /**
+     * Make TCP URL
+     * Exemple
+     * tcp://127.0.0.1
+     * tcp://127.0.0.1:8080
+     *
+     * @param string|null $host
+     * @param int|null $port
+     * @return null|string
+     */
+    private function makeTcpUri($host = null, $port = null)
+    {
+        if($host === null || $host === '') {
+            return null;
+        }
+
+        $uri = "tcp://" . $host;
+
+        if($port !== null) {
+            $uri .= ":" . $port;
+        }
+
+        return $uri;
     }
 
 }
