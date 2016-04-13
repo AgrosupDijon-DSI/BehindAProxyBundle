@@ -42,10 +42,10 @@ class ProxyService
             $configs['proxy_host'] = $this->parameters["host"];
             $configs['proxy_port'] = $this->parameters["port"];
 
-            if ($this->parameters["login"] != null) {
+            if ($this->parameters["login"] !== null) {
                 $configs['proxy_login'] = $this->parameters["login"];
             }
-            if ($this->parameters["password"] != null) {
+            if ($this->parameters["password"] !== null) {
                 $configs['proxy_password'] = $this->parameters["password"];
             }
 
@@ -71,7 +71,7 @@ class ProxyService
                 curl_setopt($resource, CURLOPT_PROXY, $this->parameters["host"]);
                 curl_setopt($resource, CURLOPT_PROXYPORT, $this->parameters["port"]);
 
-                if ($this->parameters["login"] != null) {
+                if ($this->parameters["login"] !== null) {
                     curl_setopt($resource, CURLOPT_PROXYAUTH, $this->parameters["login"] . ':' . $this->parameters["password"]);
                 }
             }
@@ -151,7 +151,7 @@ class ProxyService
                     );
                 }
 
-                if ($this->parameters["login"] != null) {
+                if ($this->parameters["login"] !== null) {
                     $auth = $this->encodeCredential($this->parameters["login"], $this->parameters["password"]);
                     $context['http']['header'] = "Proxy-Authorization: Basic $auth";
                     $context['https']['header'] = "Proxy-Authorization: Basic $auth";
