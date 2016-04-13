@@ -9,7 +9,8 @@ Add proxy parameters for CURL, SoapClient connection and PHP function using stre
 [![Latest Stable Version](https://poser.pugx.org/cnerta/behind-a-proxy-bundle/v/stable.png)](https://packagist.org/packages/cnerta/behind-a-proxy-bundle)
 [![Latest Unstable Version](https://poser.pugx.org/cnerta/behind-a-proxy-bundle/v/unstable.png)](https://packagist.org/packages/cnerta/behind-a-proxy-bundle)
 
-> **WARNING** `host_ssl` configuration has been removed since version 2.0.0
+> **WARNING** `host_ssl` configuration has been removed since version 2.0.0  
+For **PHP 5.4 and below**, please use the version 1 of the bundle
 
 Install the Bundle
 ------------------
